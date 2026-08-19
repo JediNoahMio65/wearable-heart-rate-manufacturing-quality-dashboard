@@ -1,2 +1,1 @@
-# wearable-heart-rate-manufacturing-quality-dashboard
-Synthetic manufacturing quality analytics dashboard for a simulated wearable heart-rate monitor.
+> **Simulation notice:** This project uses fictional manufacturing, test, and quality data created for educational portfolio purposes only. It does not represent a real product, manufacturer, production process, or regulatory record.
