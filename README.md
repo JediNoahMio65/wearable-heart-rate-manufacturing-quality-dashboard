@@ -141,6 +141,26 @@ It connects the data analysis to a structured quality-engineering response:
 
 A condensed project summary is available in [`docs/02_portfolio_summary.md`](docs/02_portfolio_summary.md).
 
+## Failure-Risk Prediction Model
+
+A binary classifier estimating simulated test-failure risk from attributes known **before** functional test: production line, shift, test station, firmware version, and build timing.
+
+All measured test values were deliberately excluded as features, because the simulated pass/fail label was derived by thresholding those measurements. Training on them would produce near-perfect scores that reflect leakage rather than learning.
+
+| Metric | Random Forest | Logistic Regression |
+|---|---:|---:|
+| Accuracy | 61.8% | 59.5% |
+| Macro F1 | 0.543 | 0.538 |
+| ROC AUC | 0.609 | 0.614 |
+| Failure recall | 52.0% | — |
+| Majority-class baseline accuracy | 79.5% | 79.5% |
+
+**Interpretation:** Accuracy is intentionally below the majority-class baseline. Balanced class weighting trades overall accuracy for failure detection, identifying 64 of 123 actual failures rather than the zero a baseline "always pass" model would catch. ROC AUC of 0.609 indicates weak but real predictive signal from build-time process attributes.
+
+Full documentation, including excluded features, metric rationale, permutation-importance caveats, and limitations, is in the [model card](docs/03_failure_risk_model_card.md).
+
+![Simulated failure-risk model evaluation](dashboards/failure_risk_model_evaluation.png)
+
 ## Tools
 
 - Python
