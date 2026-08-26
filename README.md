@@ -139,6 +139,8 @@ It connects the data analysis to a structured quality-engineering response:
 - Proposes corrective and preventive actions
 - Defines effectiveness checks and residual-risk limitations
 
+A condensed project summary is available in [`docs/02_portfolio_summary.md`](docs/02_portfolio_summary.md).
+
 ## Tools
 
 - Python
