@@ -47,6 +47,11 @@ Analyze synthetic manufacturing and test data for a simulated wearable heart-rat
 - Exploratory one-sided process-performance screening using \(C_{pu}\)
 - CAPA-style investigation, five-why analysis, corrective actions, and effectiveness checks
 - Reproducible analysis and version-controlled technical documentation
+- Supervised classification with scikit-learn pipelines
+- Target-leakage identification and feature exclusion rationale
+- Class-imbalance handling and metric selection for imbalanced data
+- Permutation-importance interpretation, including collinearity caveats
+- Model-card documentation
 
 ## Repository Structure
 
@@ -58,14 +63,18 @@ wearable-heart-rate-manufacturing-quality-dashboard/
 │   ├── 01_generate_synthetic_data.ipynb
 │   ├── 02_exploratory_quality_analysis.ipynb
 │   ├── 03_quality_trends_and_process_performance.ipynb
-│   └── 04_sql_quality_analysis.ipynb
+│   ├── 04_sql_quality_analysis.ipynb
+│   └── 05_failure_risk_model.ipynb
 ├── sql/
 │   └── 01_manufacturing_quality_analysis.sql
 ├── dashboards/
 │   ├── defect_pareto.png
-│   └── quality_trends_and_process_performance.png
+│   ├── quality_trends_and_process_performance.png
+│   └── failure_risk_model_evaluation.png
 └── docs/
-    └── 01_simulated_capa_quality_investigation.md
+    ├── 01_simulated_capa_quality_investigation.md
+    ├── 02_portfolio_summary.md
+    └── 03_failure_risk_model_card.md
 ```
 
 ## Analysis Workflow
@@ -80,6 +89,7 @@ wearable-heart-rate-manufacturing-quality-dashboard/
 8. Calculate exploratory one-sided \(C_{pu}\) screening indices.
 9. Reproduce manufacturing-quality KPIs and Pareto results in SQLite.
 10. Translate results into a simulated CAPA-style investigation with containment, root-cause hypothesis, corrective/preventive actions, and effectiveness checks.
+11. Train and evaluate a failure-risk classifier using only pre-test process attributes, excluding all measured test values to prevent target leakage.
 
 ## Dataset Fields
 
@@ -107,6 +117,7 @@ The notebooks were developed in Google Colab and can be run in sequence:
 3. `03_quality_trends_and_process_performance.ipynb` analyzes daily yield, firmware performance, distributions, and exploratory screening indices.
 4. `04_sql_quality_analysis.ipynb` loads the CSV into an in-memory SQLite database and executes the SQL analysis.
 5. `sql/01_manufacturing_quality_analysis.sql` contains the standalone SQLite KPI, segmentation, daily-yield, and window-function Pareto queries.
+6. `05_failure_risk_model.ipynb` trains and evaluates the pre-test failure-risk classifier.
 
 ## Process-Performance Notes
 
@@ -170,6 +181,7 @@ Full documentation, including excluded features, metric rationale, permutation-i
 - SQLite
 - Google Colab
 - GitHub
+- scikit-learn
 
 ## Limitations
 
